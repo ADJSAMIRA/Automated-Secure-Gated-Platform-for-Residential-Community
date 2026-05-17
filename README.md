@@ -1,0 +1,1 @@
+# Automated-Secure-Gated-Platform-for-Residential-Community
