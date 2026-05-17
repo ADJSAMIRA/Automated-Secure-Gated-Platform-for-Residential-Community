@@ -28,9 +28,9 @@ This repository contains the full source code of the project, divided into the f
 
 ## 👥 Meet the Team
 This project was developed collaboratively by:
-* **Samira** - IoT Hardware & System Integration (C++/ESP8266)
-* **Zineb** - Mobile Application Development (Flutter)
-* **Manal** - Backend Development & Database Management (Node.js/MySQL)
+* **Samira Adjenef** - IoT Hardware & System Integration (C++/ESP8266)
+* **Zineb meraba** - Mobile Application Development (Flutter)
+* **Manal teir** - Backend Development & Database Management (Node.js/MySQL)
 
 ---
 *Developed as a final project for University Abdelhamid Mehri – Constantine 2
