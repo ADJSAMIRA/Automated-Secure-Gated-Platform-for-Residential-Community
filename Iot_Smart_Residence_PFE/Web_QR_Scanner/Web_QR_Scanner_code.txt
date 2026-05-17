@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Residence - Digital Key</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; margin-top: 50px; background-color: #f4f4f9; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); display: inline-block; width: 85%; max-width: 400px; }
+        h2 { color: #1A237E; margin-bottom: 20px; }
+        #status { font-size: 22px; font-weight: bold; margin-top: 20px; padding: 15px; border-radius: 10px; }
+        .loader { border: 5px solid #f3f3f3; border-top: 5px solid #1A237E; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Gate Access Verification</h2>
+        <div id="loader" class="loader"></div>
+        <div id="status" style="color: gray; background-color: #f0f0f0;">Communicating with gate...</div>
+    </div>
+
+    <script>
+        const CLOUDFLARE_URL = "https://amazing-demographic-cardiovascular-louis.trycloudflare.com";
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = urlParams.get('id');
+        const statusText = document.getElementById("status");
+        const loader = document.getElementById("loader");
+
+        if (userId) {
+            fetch(`${CLOUDFLARE_URL}/api/iot/verify-qr/${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    loader.style.display = "none";
+                    if(data.status === 'OPEN' || data.success === true) {
+                        statusText.innerHTML = "✅ ACCESS GRANTED<br><span style='font-size:16px; font-weight:normal;'>Gate is opening...</span>";
+                        statusText.style.color = "#155724";
+                        statusText.style.backgroundColor = "#d4edda";
+                    } else {
+                        statusText.innerHTML = "❌ ACCESS DENIED<br><span style='font-size:16px; font-weight:normal;'>Invalid or inactive user.</span>";
+                        statusText.style.color = "#721c24";
+                        statusText.style.backgroundColor = "#f8d7da";
+                    }
+                })
+                .catch(error => {
+                    loader.style.display = "none";
+                    statusText.innerHTML = "⚠️ ERROR<br><span style='font-size:16px; font-weight:normal;'>Server connection failed.</span>";
+                    statusText.style.color = "#856404";
+                    statusText.style.backgroundColor = "#fff3cd";
+                });
+        } else {
+            loader.style.display = "none";
+            statusText.innerHTML = "❌ Invalid QR Code.";
+        }
+    </script>
+</body>
+</html>

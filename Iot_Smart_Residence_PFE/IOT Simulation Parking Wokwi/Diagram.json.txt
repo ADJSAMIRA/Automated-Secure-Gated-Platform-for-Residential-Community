@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "author": "Samira ADJENEF",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "ultrasonic1",
+      "top": -104.1,
+      "left": -224.9,
+      "attrs": { "distance": "2" }
+    },
+    {
+      "type": "wokwi-rgb-led",
+      "id": "rgb1",
+      "top": 4,
+      "left": 202.7,
+      "attrs": { "common": "cathode" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "ultrasonic1:VCC", "esp:5V", "cyan", [ "v0" ] ],
+    [ "ultrasonic1:GND", "esp:GND.1", "cyan", [ "v0" ] ],
+    [ "ultrasonic1:TRIG", "esp:5", "cyan", [ "v0" ] ],
+    [ "ultrasonic1:ECHO", "esp:18", "cyan", [ "v0" ] ],
+    [ "rgb1:COM", "esp:GND.2", "green", [ "h-19.1", "v-0.4", "h-100.84" ] ],
+    [ "rgb1:R", "esp:21", "green", [ "v0" ] ],
+    [ "rgb1:G", "esp:19", "green", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}

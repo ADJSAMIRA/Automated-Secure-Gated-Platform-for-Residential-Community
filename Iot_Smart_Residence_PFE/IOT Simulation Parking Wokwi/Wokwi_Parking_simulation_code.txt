@@ -1,0 +1,70 @@
+#include <WiFi.h>
+#include <HTTPClient.h>
+#include <WiFiClientSecure.h>
+#include <ArduinoJson.h>
+
+const char* ssid = "Wokwi-GUEST";
+const char* password = "";
+const char* baseUrl = "https://amazing-demographic-cardiovascular-louis.trycloudflare.com/api/iot/parking-update";
+
+#define TRIG_PIN 5
+#define ECHO_PIN 18
+#define RGB_RED 21
+#define RGB_GREEN 19
+
+String lastStatus = "";
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(TRIG_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
+  pinMode(RGB_RED, OUTPUT);
+  pinMode(RGB_GREEN, OUTPUT);
+
+  digitalWrite(RGB_GREEN, HIGH); 
+  digitalWrite(RGB_RED, LOW);
+
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\nWiFi Connected!");
+}
+
+void loop() {
+  digitalWrite(TRIG_PIN, LOW); delayMicroseconds(2);
+  digitalWrite(TRIG_PIN, HIGH); delayMicroseconds(10);
+  digitalWrite(TRIG_PIN, LOW);
+  long duration = pulseIn(ECHO_PIN, HIGH);
+  float distance = duration * 0.034 / 2;
+
+  String currentStatus = (distance > 0 && distance < 50) ? "Occupied" : "Available";
+
+  if (currentStatus != lastStatus) {
+    if (currentStatus == "Occupied") {
+      digitalWrite(RGB_RED, HIGH); digitalWrite(RGB_GREEN, LOW);
+    } else {
+      digitalWrite(RGB_RED, LOW); digitalWrite(RGB_GREEN, HIGH);
+    }
+
+    if (WiFi.status() == WL_CONNECTED) {
+      WiFiClientSecure client;
+      client.setInsecure();
+      HTTPClient http;
+      http.begin(client, baseUrl);
+      http.addHeader("Content-Type", "application/json");
+      http.setUserAgent("Mozilla/5.0"); 
+
+      String payload = "{\"spot_name\":\"P03\", \"status\":\"" + currentStatus + "\"}";
+      int httpCode = http.POST(payload);
+      
+      Serial.print("Update P03: "); Serial.println(currentStatus);
+      Serial.print("Response: "); Serial.println(httpCode);
+      
+      http.end();
+      lastStatus = currentStatus;
+    }
+  }
+  delay(2000);
+}
