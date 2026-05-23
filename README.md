@@ -20,13 +20,15 @@ The **Smart Residence Management System** is a comprehensive, IoT-integrated sol
 ## 📂 Repository Structure
 This repository contains the full source code of the project, divided into the following modules:
 
-* `Iot_Smart_Residence_PFE/` : Contains the ESP8266 C++ code and Wokwi simulation configurations.
-* `2_Web_QR_Scanner/` : Contains the HTML/JS web interface for the gate QR code verification.
-* `3_Backend_Smart_Residence_PFE/` : Contains the Node.js API source code and backend configurations.
-* `4_DataBase_Smart_residence_PFE/` : Contains the `smart_residence.sql` file with the database schema and sample data.
-* `5_Frontend_Smart_Residence_PFE/` : Contains the mobile and dashboard applications, split into:
-admin_residence/ : The web dashboard/app for system administrators and security management.
-appresidence/ : The mobile application dedicated to the residents.
+* `Backend_Smart_Residence_PFE/` : Contains the Node.js API source code and backend configurations.
+* `DataBase_Smart_residence_PFE/` : Contains the database schema (`smart_residence.sql`) and sample data for MySQL.
+* `Frontend_Smart_Residence_PFE/` : Contains the mobile and dashboard applications, split into:
+  * `admin_residence/` : The web dashboard/app for system administrators and security management.
+  * `appresidence/` : The mobile application dedicated to the residents.
+* `lot_Smart_Residence_PFE/` : Contains the IoT and hardware configurations, split into:
+  * `IOT Simulation Parking Wokwi/` : The Wokwi simulation configurations for the smart parking system.
+  * `Smart Lighting Gate Fire Alert IOT Code/` : The ESP8266 C++ code for automated lighting, gate control, and fire alerts.
+  * `Web_QR_Scanner/` : The HTML/JS web interface used for gate QR code verification.
 
 ## 👥 Meet the Team
 This project was developed collaboratively by:
