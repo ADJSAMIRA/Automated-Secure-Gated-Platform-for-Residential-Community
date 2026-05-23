@@ -20,11 +20,13 @@ The **Smart Residence Management System** is a comprehensive, IoT-integrated sol
 ## 📂 Repository Structure
 This repository contains the full source code of the project, divided into the following modules:
 
-* `1_IoT_Hardware/` : Contains the ESP8266 C++ code and Wokwi simulation configurations.
+* `Iot_Smart_Residence_PFE/` : Contains the ESP8266 C++ code and Wokwi simulation configurations.
 * `2_Web_QR_Scanner/` : Contains the HTML/JS web interface for the gate QR code verification.
-* `3_Backend/` : Contains the Node.js API source code.
-* `4_Database/` : Contains the `smart_residence.sql` file with the database schema and sample data.
-* `5_Flutter_Apps/` : Contains the Flutter source code for the mobile applications.
+* `3_Backend_Smart_Residence_PFE/` : Contains the Node.js API source code and backend configurations.
+* `4_DataBase_Smart_residence_PFE/` : Contains the `smart_residence.sql` file with the database schema and sample data.
+* `5_Frontend_Smart_Residence_PFE/` : Contains the mobile and dashboard applications, split into:
+admin_residence/ : The web dashboard/app for system administrators and security management.
+appresidence/ : The mobile application dedicated to the residents.
 
 ## 👥 Meet the Team
 This project was developed collaboratively by:
